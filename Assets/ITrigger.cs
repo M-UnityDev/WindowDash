@@ -1,0 +1,1 @@
+public interface ITrigger { void TriggerAction(); }

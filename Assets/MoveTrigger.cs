@@ -1,15 +1,13 @@
 using UnityEngine;
-
-public class MoveTrigger : MonoBehaviour
+using DG.Tweening;
+public class MoveTrigger : MonoBehaviour, ITrigger
 {
-    
-    void Start()
+    [SerializeField] private Transform Target;
+    [SerializeField] private float MoveDuration;
+    [SerializeField] private Vector3 PositionToMove;
+    [SerializeField] private Ease Ease;
+    public void TriggerAction()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        Target.DOLocalMove(PositionToMove, MoveDuration).SetEase(Ease);
     }
 }

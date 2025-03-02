@@ -1,11 +1,17 @@
 using UnityEngine;
-
 public class TriggerDetect : MonoBehaviour
 {
-    //private bool isPlayerDetected;
-    public bool isPlayerDetected {get; private set;}
-    private void OnCollisionEnter(Collision collision)
+
+    private void Awake()
     {
-        isPlayerDetected = collision.gameObject.CompareTag("Player");
+        
+    }
+    private void OnTriggerEnter(Collider Other) => DoAction(Other);
+    private void DoAction(Collider Other)
+    {
+        if (Other.gameObject.CompareTag("Player") && TryGetComponent(out ITrigger Trigger))
+        {
+            Trigger.TriggerAction();
+        }
     }
 }
