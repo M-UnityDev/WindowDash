@@ -1,6 +1,7 @@
 using UnityEngine;
 public class DebugDirector : MonoBehaviour
 {
+    [SerializeField] LayerMask LayersToShow;
     [SerializeField] private bool HideDebugObjectsInEditor;
     private void Awake()
     {
@@ -14,6 +15,6 @@ public class DebugDirector : MonoBehaviour
     private void HideDebug()
     {
         foreach (Camera c in FindObjectsByType<Camera>(FindObjectsSortMode.None))
-            c.cullingMask = 55;
+            c.cullingMask = LayersToShow;
     }
 }

@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 public class TransparentWindow : MonoBehaviour
 {
-    Vector3 worldPosition;
     [DllImport("user32.dll")]
     public static extern IntPtr GetActiveWindow();
     [DllImport("user32.dll")]
@@ -26,7 +26,7 @@ public class TransparentWindow : MonoBehaviour
     private IntPtr hWnd;
     private void Start()
     {
-#if !UNITY_EDITOR_
+#if !UNITY_EDITOR
         hWnd = GetActiveWindow();
         MARGINS margins = new MARGINS { cxLeftWidth = -1};
         DwmExtendFrameIntoClientArea(hWnd, ref margins);
@@ -36,10 +36,7 @@ public class TransparentWindow : MonoBehaviour
     }
     private void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane;
-        worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
-        SetClickThrough(Physics2D.OverlapPoint(worldPosition) == null);
+        SetClickThrough(!EventSystem.current.IsPointerOverGameObject());
     }
     private void SetClickThrough(bool clickthrough)
     {

@@ -12,6 +12,7 @@ namespace Game.Input
         private static MainInputAction _input;
         public static InputAction Movement => _input.Player.Move;
         public static InputAction Jump => _input.Player.Jump;
+        public static InputAction MousePosition => _input.Player.MousePosition;
         public static InputAction Interact => _input.Player.Interact;
         public static InputActionMap Player => _input.Player;
 
